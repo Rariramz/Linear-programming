@@ -3,17 +3,29 @@ import numpy as np
 
 def input_matrix(n, message):
     print(message)
-    return [[float(j) for j in input().split()] for i in range(n)]
+    return np.array([[float(j) for j in input().split()] for _ in range(n)])
 
 
 def input_vector(message):
     print(message)
-    return list(map(int, input().split()))
+    return list(float(j) for j in input().split())
+
+
+def matrix_multiplication(matrix_a, matrix_b, index):
+    result_matrix = np.array([[0 for _ in range(len(matrix_a[0]))] for _ in range(len(matrix_a))])
+    for i in range(len(matrix_a)):
+        for j in range(len(matrix_a[0])):
+            for k in range(len(matrix_a[0])):
+                if not (k == index or k == i):
+                    continue
+                result_matrix[i, j] += matrix_a[i, k] * matrix_b[k, j]
+    return result_matrix
 
 
 def matrix_inversion(n, i, matrix_a_inverse, vector_x, logger=print):
     def log(message):
-        logger(message)
+        if logger:
+            logger(message)
 
     i -= 1
     # A2 - матрица, полученная из A заменой i-го столбца на столбец x
@@ -52,7 +64,7 @@ def matrix_inversion(n, i, matrix_a_inverse, vector_x, logger=print):
     log(matrix_q)
 
     log('\nШАГ 5: находим A2_inverse = Q * A_inverse:')
-    return matrix_q.dot(matrix_a_inverse)
+    return matrix_multiplication(matrix_q, matrix_a_inverse, i)
 
 
 if __name__ == '__main__':
@@ -60,8 +72,8 @@ if __name__ == '__main__':
 
     n_ = int(input('Размерность матрицы n = '))
     i_ = int(input(f'Номер столбца, который нужно заменить (1 < i <= {n_}) i = '))
-    a = np.array(input_matrix(n_, 'Введите матрицу A, отделяя строки матрицы переводом строки:'))
-    a_inverse = np.array(input_matrix(n_, 'Введите обратную матрицу A, отделяя строки матрицы переводом строки:'))
-    x = np.array(input_vector('Введите вектор x(T):'))
+    a = input_matrix(n_, 'Введите матрицу A, отделяя строки матрицы переводом строки:')
+    a_inverse = input_matrix(n_, 'Введите обратную матрицу A, отделяя строки матрицы переводом строки:')
+    x = input_vector('Введите вектор x(T):')
 
-    print(matrix_inversion(n_, i_, a_inverse, x))
+    print(matrix_inversion(n_, i_, a, a_inverse, x))

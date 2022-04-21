@@ -1,23 +1,10 @@
 import numpy as np
-from matrix_inversion import matrix_inversion
+from matrix_inversion import matrix_inversion, input_vector, input_matrix
 
 
-def input_matrix(m, message):
+def input_int_vector(message):
     print(message)
-    matrix = []
-    for i in range(m):
-        matrix.append(list(map(int, input().split())))
-    return np.array(matrix)
-
-
-def input_vector(message):
-    print(message)
-    return list(map(int, input().split()))
-
-
-def input_float_vector(message):
-    print(message)
-    return list(map(float, input().split()))
+    return list(int(j) for j in input().split())
 
 
 def create_matrix_ab(matrix_a, vector_jb):
@@ -173,8 +160,8 @@ if __name__ == '__main__':
     m_ = int(input('m = '))
     n_ = int(input('n = '))
     a = input_matrix(m_, 'Введите матрицу A, отделяя строки матрицы переводом строки:')
-    c = input_vector('Введите вектор c(T):')
-    x = input_float_vector('Введите вектор x(T):')
-    jb = input_vector('Введите множество базисных индексов jb:')
+    c = input_int_vector('Введите вектор c(T):')
+    x = input_vector('Введите вектор x(T):')
+    jb = input_int_vector('Введите множество базисных индексов jb:')
 
     print(main_stage_simplex_method(m_, n_, a, x, c, jb))
