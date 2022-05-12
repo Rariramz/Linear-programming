@@ -1,12 +1,12 @@
 import numpy as np
 
 
-def input_matrix(n, message):
+def input_float_matrix(n, message=""):
     print(message)
     return np.array([[float(j) for j in input().split()] for _ in range(n)])
 
 
-def input_vector(message):
+def input_float_vector(message=""):
     print(message)
     return list(float(j) for j in input().split())
 
@@ -22,17 +22,15 @@ def matrix_multiplication(matrix_a, matrix_b, index):
     return result_matrix
 
 
-def matrix_inversion(n, i, matrix_a, matrix_a_inverse, vector_x, logger=print):
+def matrix_inversion(n, i, matrix_a_inverse, vector_x, logger=print):
     def log(message):
         if logger:
             logger(message)
 
-    i -= 1
+    log('~~~~~~ Обращение матрицы с измененным столбцом ~~~~~')
     # A2 - матрица, полученная из A заменой i-го столбца на столбец x
     # A2_inverse - обратная матрица A2
 
-    log('\n\tМатрица A:')
-    log(matrix_a)
     log('\tОбратная матрица A:')
     log(matrix_a_inverse)
     log('\tВектор x(T):')
@@ -72,10 +70,21 @@ def matrix_inversion(n, i, matrix_a, matrix_a_inverse, vector_x, logger=print):
 if __name__ == '__main__':
     np.set_printoptions(formatter={'float': lambda x: "{0:0.2f}".format(x)})
 
-    n_ = int(input('Размерность матрицы n = '))
-    i_ = int(input(f'Номер столбца, который нужно заменить (1 < i <= {n_}) i = '))
-    a = input_matrix(n_, 'Введите матрицу A, отделяя строки матрицы переводом строки:')
-    a_inverse = input_matrix(n_, 'Введите обратную матрицу A, отделяя строки матрицы переводом строки:')
-    x = input_vector('Введите вектор x(T):')
+    # n_ = int(input('Размерность матрицы n = '))
+    # i_ = int(input(f'Номер столбца, который нужно заменить (1 < i <= {n_}) i = '))
+    # a = input_float_matrix(n_, 'Введите матрицу A, отделяя строки матрицы переводом строки:')
+    # a_inverse = input_float_matrix(n_, 'Введите обратную матрицу A, отделяя строки матрицы переводом строки:')
+    # x = input_float_vector('Введите вектор x(T):')
 
-    print(matrix_inversion(n_, i_, a, a_inverse, x))
+    # Тестовый случай
+    n_ = 3
+    i_ = 3
+    a = np.array([[1, -1, 0],
+                  [0, 1, 0],
+                  [0, 0, 1]])
+    a_inverse = np.array([[1, 1, 0],
+                          [0, 1, 0],
+                          [0, 0, 1]])
+    x = list([1, 0, 1])
+
+    print(matrix_inversion(n_, i_ - 1, a_inverse, x))
