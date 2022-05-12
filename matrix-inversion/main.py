@@ -8,7 +8,7 @@ def input_float_matrix(n, message=""):
 
 def input_float_vector(message=""):
     print(message)
-    return list(float(j) for j in input().split())
+    return list(float(_) for _ in input().split())
 
 
 def matrix_multiplication(matrix_a, matrix_b, index):
@@ -39,32 +39,36 @@ def matrix_inversion(n, i, matrix_a_inverse, vector_x, logger=print):
 
     log('\nШАГ 1: находим l0 = A_inverse * x:')
     vector_l0 = matrix_a_inverse.dot(vector_x)
-    log(vector_l0)
+    log(f'\tl0 = {vector_l0}')
 
     log('\nЕсли i-й элемент вектора l0[i] == 0, то матрица A2, '
           'полученная из A заменой i-го столбца на столбец x, необратима - конец метода.')
     log('Матрица обратима?')
-    log(f'l0[i] = {vector_l0[i]}')
+    log(f'\tl0[i] = {vector_l0[i]}')
     if vector_l0[i] == 0:
-        return 'НЕТ'
-    log('ДА')
+        log('\tНЕТ')
+        return None
+    log('\t')
 
     log('\nШАГ 2: формируем вектор l1, который получается из вектора l0 заменой i-го элемента на -1:')
     vector_l1 = vector_l0.copy()
     vector_l1[i] = -1
-    log(vector_l1)
+    log(f'\tl1 = {vector_l1}')
 
     log('\nШАГ 3: находим l2 = -1 / l0[i] * l1:')
     vector_l2 = (-1 / vector_l0[i]) * vector_l1
-    log(vector_l2)
+    log(f'\tl2 = {vector_l2}')
 
     log('\nШАГ 4: формируем матрицу Q, получающуюся из единичной матрицы порядка n заменой i-го столбца на столбец l2:')
     matrix_q = np.eye(n)
     matrix_q[:, i] = vector_l2
-    log(matrix_q)
+    log(f'\tQ =\n{matrix_q}')
 
     log('\nШАГ 5: находим A2_inverse = Q * A_inverse:')
-    return matrix_multiplication(matrix_q, matrix_a_inverse, i)
+    matrix_a2_inverse = matrix_multiplication(matrix_q, matrix_a_inverse, i)
+    log(f'\tA2 =\n{matrix_a2_inverse}')
+    return matrix_a2_inverse
+
 
 
 if __name__ == '__main__':

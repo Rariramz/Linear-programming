@@ -4,7 +4,7 @@ from matrix_inversion import matrix_inversion, input_float_vector, input_float_m
 
 def input_int_vector(message):
     print(message)
-    return list(int(j) for j in input().split())
+    return list(int(_) for _ in input().split())
 
 
 def create_matrix_ab(matrix_a, vector_jb):
@@ -74,7 +74,7 @@ def main_stage_simplex_method(m, n, matrix_a, vector_x, vector_c, vector_jb, log
     log('\tВектор c(T):')
     log(vector_c)
     log('\tВектор B:')
-    log(list(j + 1 for j in vector_jb))
+    log(list(_ + 1 for _ in vector_jb))
 
     log('~~~~~ Основная фаза симплекс-метода ~~~~~')
     vector_j = {i for i in range(0, n)}  # Множество индексов
@@ -90,7 +90,7 @@ def main_stage_simplex_method(m, n, matrix_a, vector_x, vector_c, vector_jb, log
             if iteration == 1:
                 matrix_ab_inverse = np.linalg.inv(matrix_ab.copy())
             else:
-                matrix_ab_inverse = matrix_inversion(len(vector_jb), k, matrix_ab_inverse, matrix_a[:, j0])
+                matrix_ab_inverse = matrix_inversion(len(vector_jb), k, matrix_ab_inverse, matrix_a[:, j0], logger)
             log(matrix_ab_inverse)
         except np.linalg.LinAlgError:
             log('..не удалось построить Ab_inverse.')
@@ -116,8 +116,8 @@ def main_stage_simplex_method(m, n, matrix_a, vector_x, vector_c, vector_jb, log
         log(f'\tmin_delta = {min_delta}')
         if min_delta >= 0:
             log('\tДА')
-            return f'\nОтвет:\n\t(x(T) = ({" ".join(map(str, vector_x))}), ' \
-                   f'B = ({", ".join(map(str, vector_jb))})) - оптимальный план.'
+            log(f'\nОтвет:\n\t(x(T) = ({" ".join(map(str, vector_x))}), B = ({", ".join(map(str, vector_jb))})) - оптимальный план.')
+            return vector_x, vector_jb
         log('\tНЕТ')
 
         log('\nШАГ 6: находим в векторе оценок delta первую отрицательную компоненту и сохраняем её индекс в j0:')
@@ -144,7 +144,8 @@ def main_stage_simplex_method(m, n, matrix_a, vector_x, vector_c, vector_jb, log
         log('\ttheta_min = infinity ?')
         if theta_min == float('inf'):
             log('\tДА')
-            return '\nОтвет: целевой функционал задачи не ограничен сверху на множестве допустимых планов.'
+            log('\nОтвет: целевой функционал задачи не ограничен сверху на множестве допустимых планов.')
+            return None
         log('\tНЕТ')
 
         log('\nШАГ 11: находим первый индекс k, на котором достигается минимум theta,')
@@ -156,7 +157,7 @@ def main_stage_simplex_method(m, n, matrix_a, vector_x, vector_c, vector_jb, log
 
         log('\nШАГ 12: в упорядоченном множестве B заменим k-й индекс jbk на индекс j0:')
         vector_jb[vector_jb.index(jbk)] = j0
-        log(f'\tB = {list(i + 1 for i in vector_jb)}')
+        log(f'\tB = {list(_ + 1 for _ in vector_jb)}')
 
         log('\nШАГ 13: обновим компоненты плана x: x[j0] = theta_min и для каждого i != k: x[j[i]] -= theta:')
         vector_x = create_vector_x(
