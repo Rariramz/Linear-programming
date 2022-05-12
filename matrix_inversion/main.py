@@ -41,8 +41,8 @@ def matrix_inversion(n, i, matrix_a_inverse, vector_x, logger=print):
     vector_l0 = matrix_a_inverse.dot(vector_x)
     log(f'\tl0 = {vector_l0}')
 
-    log('\nЕсли i-й элемент вектора l0[i] == 0, то матрица A2, '
-          'полученная из A заменой i-го столбца на столбец x, необратима - конец метода.')
+    log('\nЕсли i-й элемент вектора l0[i] == 0, то матрица A2, ')
+    log('полученная из A заменой i-го столбца на столбец x, необратима - конец метода.')
     log('Матрица обратима?')
     log(f'\tl0[i] = {vector_l0[i]}')
     if vector_l0[i] == 0:
@@ -59,7 +59,8 @@ def matrix_inversion(n, i, matrix_a_inverse, vector_x, logger=print):
     vector_l2 = (-1 / vector_l0[i]) * vector_l1
     log(f'\tl2 = {vector_l2}')
 
-    log('\nШАГ 4: формируем матрицу Q, получающуюся из единичной матрицы порядка n заменой i-го столбца на столбец l2:')
+    log('\nШАГ 4: формируем матрицу Q, получающуюся из единичной матрицы порядка n')
+    log('заменой i-го столбца на столбец l2:')
     matrix_q = np.eye(n)
     matrix_q[:, i] = vector_l2
     log(f'\tQ =\n{matrix_q}')
@@ -68,7 +69,6 @@ def matrix_inversion(n, i, matrix_a_inverse, vector_x, logger=print):
     matrix_a2_inverse = matrix_multiplication(matrix_q, matrix_a_inverse, i)
     log(f'\tA2 =\n{matrix_a2_inverse}')
     return matrix_a2_inverse
-
 
 
 if __name__ == '__main__':
@@ -91,4 +91,4 @@ if __name__ == '__main__':
                           [0, 0, 1]])
     x = list([1, 0, 1])
 
-    print(matrix_inversion(n_, i_ - 1, a_inverse, x))
+    matrix_inversion(n_, i_ - 1, a_inverse, x)

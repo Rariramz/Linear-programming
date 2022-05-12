@@ -186,4 +186,4 @@ if __name__ == '__main__':
     jb_ = list([3, 4, 5])
 
     jb = list(j - 1 for j in jb_)
-    print(main_stage_simplex_method(m_, n_, a, x, c, jb))
+    main_stage_simplex_method(m_, n_, a, x, c, jb)

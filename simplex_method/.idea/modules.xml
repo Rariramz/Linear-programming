@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/matrix-inversion.iml" filepath="$PROJECT_DIR$/.idea/matrix-inversion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/simplex_method.iml" filepath="$PROJECT_DIR$/.idea/simplex_method.iml" />
     </modules>
   </component>
 </project>
