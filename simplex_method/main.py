@@ -77,7 +77,7 @@ def main_stage_simplex_method(m, n, matrix_a, vector_x, vector_c, vector_jb, log
     log(list(_ + 1 for _ in vector_jb))
 
     log('~~~~~ Основная фаза симплекс-метода ~~~~~')
-    vector_j = {i for i in range(0, n)}  # Множество индексов
+    vector_j = {_ for _ in range(0, n)}  # Множество индексов
 
     iteration = 1
     while True:
@@ -116,7 +116,8 @@ def main_stage_simplex_method(m, n, matrix_a, vector_x, vector_c, vector_jb, log
         log(f'\tmin_delta = {min_delta}')
         if min_delta >= 0:
             log('\tДА')
-            log(f'\nОтвет:\n\t(x(T) = ({" ".join(map(str, vector_x))}), B = ({", ".join(map(str, vector_jb))})) - оптимальный план.')
+            log(f'\nОтвет:\n\t(x(T) = ({" ".join(map(str, vector_x))}), ')
+            log(f'B = ({", ".join(map(str, list(_ + 1 for _ in vector_jb)))})) - оптимальный план.')
             return vector_x, vector_jb
         log('\tНЕТ')
 
