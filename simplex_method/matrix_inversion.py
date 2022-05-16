@@ -48,7 +48,7 @@ def matrix_inversion(n, i, matrix_a_inverse, vector_x, logger=print):
     if vector_l0[i] == 0:
         log('\tНЕТ')
         return None
-    log('\t')
+    log('\tДА')
 
     log('\nШАГ 2: формируем вектор l1, который получается из вектора l0 заменой i-го элемента на -1:')
     vector_l1 = vector_l0.copy()

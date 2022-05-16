@@ -19,24 +19,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="73fbad87-bb02-4d77-901f-2d631109711c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../matrix-inversion/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../matrix_inversion/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../matrix-inversion/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../matrix_inversion/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../matrix-inversion/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../matrix_inversion/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../matrix-inversion/.idea/matrix-inversion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../matrix_inversion/.idea/matrix_inversion.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../matrix-inversion/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../matrix_inversion/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../matrix-inversion/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../matrix_inversion/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../matrix-inversion/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../matrix_inversion/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../matrix-inversion/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../matrix_inversion/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../simplex-method/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../simplex-method/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../simplex-method/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../simplex-method/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../simplex-method/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../simplex-method/.idea/simplex-method.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/simplex_method.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../simplex-method/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../simplex-method/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../simplex-method/matrix_inversion.py" beforeDir="false" afterPath="$PROJECT_DIR$/matrix_inversion.py" afterDir="false" />
+    <list default="true" id="73fbad87-bb02-4d77-901f-2d631109711c" name="Default Changelist" comment="S">
+      <change afterPath="$PROJECT_DIR$/../matrix_transport_problem/north_west_corner_rule.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../matrix_transport_problem/search_optimal_plan.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../quadraic_programming/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../initial_stage_simplex_method/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../initial_stage_simplex_method/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../initial_stage_simplex_method/main_stage_simplex_method.py" beforeDir="false" afterPath="$PROJECT_DIR$/../initial_stage_simplex_method/main_stage_simplex_method.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../initial_stage_simplex_method/matrix_inversion.py" beforeDir="false" afterPath="$PROJECT_DIR$/../initial_stage_simplex_method/matrix_inversion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../matrix_inversion/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../matrix_inversion/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/matrix_inversion.py" beforeDir="false" afterPath="$PROJECT_DIR$/matrix_inversion.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,9 +53,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../matrix_inversion" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.matrix_inversion">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="simplex_method" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -85,6 +78,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="matrix_inversion" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="simplex_method" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/matrix_inversion.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.matrix_inversion" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="Vcs.Log.Tabs.Properties">
@@ -100,21 +119,41 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="980" height="208" key="GridCell.Tab.0.bottom" timestamp="1652392469739">
+    <state x="549" y="170" key="FileChooserDialogImpl" timestamp="1652727659320">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="980" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1652392469739" />
-    <state width="980" height="208" key="GridCell.Tab.0.center" timestamp="1652392469739">
+    <state x="549" y="170" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1652727659320" />
+    <state width="1515" height="96" key="GridCell.Tab.0.bottom" timestamp="1652727660658">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="980" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1652392469739" />
-    <state width="980" height="208" key="GridCell.Tab.0.left" timestamp="1652392469739">
+    <state width="1515" height="96" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1652727660658" />
+    <state width="1515" height="96" key="GridCell.Tab.0.center" timestamp="1652727660658">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="980" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1652392469739" />
-    <state width="980" height="208" key="GridCell.Tab.0.right" timestamp="1652392469739">
+    <state width="1515" height="96" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1652727660658" />
+    <state width="1515" height="96" key="GridCell.Tab.0.left" timestamp="1652727660658">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="980" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1652392469739" />
+    <state width="1515" height="96" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1652727660658" />
+    <state width="1515" height="96" key="GridCell.Tab.0.right" timestamp="1652727660658">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="96" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1652727660658" />
+    <state x="535" y="119" key="RollbackChangesDialog" timestamp="1652727596228">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="535" y="119" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1652727596228" />
+    <state x="277" y="57" key="SettingsEditor" timestamp="1652729893591">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1652729893591" />
+    <state x="590" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1652727620303">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="590" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1652727620303" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1652727084058">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1652727084058" />
   </component>
 </project>
