@@ -128,7 +128,7 @@ B = [(1, 1), (2, 2), (0, 2), (2, 0), (1, 2)]
 
 `B` contains zero-based row/column pairs for the final basis, including the zero-valued cell `(2, 2)`. The basis is algorithm bookkeeping; shipment quantities are stored in the matrix. The learning notes explain [why a zero shipment can belong to the basis](learning-notes.md#reading-the-reported-transportation-result).
 
-The script prints an allocation and trace; the cost totals, percentage reduction, and optimality certificate above are separate calculations. The historical execution environment was not recorded, and dependency versions are not pinned.
+The script prints an allocation and trace; the cost totals, percentage reduction, and optimality certificate above are separate calculations. The example was subsequently rerun successfully with Python 3.14.3 and NumPy 2.5.3 on Windows, reproducing this allocation. NumPy is pinned in `requirements.txt`; the historical coursework environment was not recorded.
 
 ## Scope
 

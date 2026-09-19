@@ -172,7 +172,7 @@ For each method, try to answer: What does it assume at the start? What changes d
 
 - The repository contains standalone scripts and duplicated helpers rather than an installable package.
 - Example data is embedded in source files; there is no shared command-line interface or input-file format.
-- Dependency versions and supported Python versions are not yet specified or tested.
+- NumPy is pinned in `requirements.txt`. The six examples have been run with Python 3.14.3 and NumPy 2.5.3 on Windows; other environments remain untested.
 - There are no automated regression tests or comparisons against reference solvers.
 - Numerical tolerances, degenerate cases, termination behavior, and failure reporting need review before relying on results for unfamiliar inputs.
 - The initial-phase entry point demonstrates the feasibility stage; it does not use its local `c` variable to optimize the original objective afterward.
@@ -214,3 +214,27 @@ $$
 $$
 
 Our feasible allocation costs exactly 3900, and the bound says nothing feasible can cost less. Together, those facts prove optimality for this example. The potentials are a certificate we can check independently of the algorithm's printed claim.
+
+
+## Reproducing the original examples
+
+All six entry points completed successfully on Windows using Python 3.14.3 and NumPy 2.5.3. Install the recorded dependency with `python -m pip install -r requirements.txt` inside the virtual environment. Pinning means selecting the exact NumPy version used for this check, so future installations do not silently choose a different release.
+
+| Example | Observed result | How to interpret it |
+| --- | --- | --- |
+| Matrix inverse update | Rows `(1, 1, -1)`, `(0, 1, 0)`, `(0, 0, 1)` | The inverse after replacing the selected column |
+| Main simplex phase | `x = (3, 2, 2, 0, 0)` | The reported optimal decision vector; with the supplied coefficients, the objective is 5 |
+| Initial simplex phase | `x = (0, 0, 0)` | A feasible starting solution; this stage does not optimize the original objective |
+| Dual simplex | `x = (0.25, 0.5, 0, 0, 0)` | The reported optimal decision vector; the supplied objective coefficients give -2.5 |
+| Transportation | Shipments documented in the case study | Total cost 3900, with feasibility and optimality checked separately |
+| Quadratic programming | `x = (1.7, 2.4, 0, 0.3)` | The reported optimal vector for the embedded quadratic example |
+
+These are execution observations, not a comprehensive test suite or independent proofs for every algorithm.
+
+### Why did the quadratic example need a change?
+
+The original code called `np.row_stack`, which is unavailable in the installed NumPy version. Replacing its two uses with `np.vstack` stacks the same two-dimensional blocks vertically. This is a compatibility repair; the mathematical steps and example inputs are unchanged.
+
+This illustrates the distinction between an algorithm and its software environment: a previously working program can stop running because a dependency changes. Recording the environment makes such problems easier to reproduce.
+
+For captured or redirected Russian-language output on Windows, use `python -X utf8 path/to/main.py` if the terminal's default encoding cannot represent the characters.

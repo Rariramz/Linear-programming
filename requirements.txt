@@ -1,0 +1,2 @@
+# Version used to run the built-in examples (Python 3.14.3 on Windows).
+numpy==2.5.3

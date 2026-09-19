@@ -68,8 +68,8 @@ def quadratic_programming_task(vector_c, matrix_d, matrix_a, vector_x, vector_jb
         matrix_ab1_star = np.transpose(matrix_ab_star)
         log(f"\tAb'* =\n{matrix_ab1_star}")
 
-        matrix1 = np.row_stack((matrix_d_star, matrix_ab1_star))
-        matrix2 = np.row_stack((matrix_ab_star, np.zeros([len(matrix_ab_star[0]), len(matrix_ab1_star)])))
+        matrix1 = np.vstack((matrix_d_star, matrix_ab1_star))
+        matrix2 = np.vstack((matrix_ab_star, np.zeros([len(matrix_ab_star[0]), len(matrix_ab1_star)])))
         matrix_h = np.column_stack((matrix1, matrix2))
         log(f'\tH =\n{matrix_h}')
         matrix_h_inverse = np.linalg.inv(matrix_h)

@@ -21,7 +21,7 @@ The implementations expose basis changes, matrix operations, and intermediate so
 
 ## Quick start
 
-Requires **Python 3** and **NumPy**. From the repository root, create a virtual environment:
+Requires **Python 3** and **NumPy**. All six built-in examples were run successfully with **Python 3.14.3 and NumPy 2.5.3 on Windows**; NumPy is pinned in `requirements.txt`. From the repository root, create a virtual environment:
 
 ```sh
 python -m venv .venv
@@ -42,7 +42,7 @@ source .venv/bin/activate
 Install NumPy and run the transportation example:
 
 ```sh
-python -m pip install numpy
+python -m pip install -r requirements.txt
 python matrix_transport_problem/main.py
 ```
 
@@ -64,10 +64,12 @@ Run these files directly: imports rely on helper modules in the same directory. 
 
 ## Project status
 
-This repository preserves the original coursework implementations. It currently consists of standalone scripts with embedded examples and some duplicated helpers. There is no automated test suite or reference-solver comparison, and a supported Python/NumPy version range has not yet been established.
+This repository preserves the original coursework implementations. It currently consists of standalone scripts with embedded examples and some duplicated helpers. There is no automated test suite or reference-solver comparison, and compatibility beyond the recorded environment has not yet been established. Successful example execution is not comprehensive algorithm validation.
 
 The initial simplex example demonstrates feasibility search only. Numerical robustness and behavior on degenerate, infeasible, and unbounded inputs require further validation.
 
 ## Further documentation
 
 The [learning notes](docs/learning-notes.md) provide a mathematical refresher, a worked transportation example, a glossary of code notation, and a suggested study sequence.
+
+If redirected console output raises an encoding error on Windows, add `-X utf8`, for example: `python -X utf8 matrix_transport_problem/main.py`.
