@@ -119,7 +119,7 @@ def initial_stage_simplex_method(matrix_a, vector_b, m, n, logger=print):
             log(f'\tA1 = \n{matrix_a1}')
 
         log('\nПереходим на ШАГ 7.')
-        from_seven_step(matrix_a, vector_jb, vector_b, matrix_a1)
+        return from_seven_step(matrix_a, vector_jb, vector_b, matrix_a1)
 
     return from_seven_step(matrix_a, vector_jb, vector_b, matrix_a1)
 

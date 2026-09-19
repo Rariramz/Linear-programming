@@ -173,11 +173,11 @@ For each method, try to answer: What does it assume at the start? What changes d
 - The repository contains standalone scripts and duplicated helpers rather than an installable package.
 - Example data is embedded in source files; there is no shared command-line interface or input-file format.
 - NumPy is pinned in `requirements.txt`. The six examples have been run with Python 3.14.3 and NumPy 2.5.3 on Windows; other environments remain untested.
-- There are no automated regression tests or comparisons against reference solvers.
+- Six automated regression tests cover the original examples. Broader inputs and reference-solver comparisons remain future work.
 - Numerical tolerances, degenerate cases, termination behavior, and failure reporting need review before relying on results for unfamiliar inputs.
 - The initial-phase entry point demonstrates the feasibility stage; it does not use its local `c` variable to optimize the original objective afterward.
 
-Planned improvements are to verify the existing examples, add tests for both solutions and failure cases, consolidate shared code, and expand validation beyond the documented transportation instance. The [transportation case study](transportation-case-study.md) now records the reported allocation and an optimality certificate; the broader validation and code improvements remain future tasks.
+Planned improvements are to add tests for more inputs and failure cases, consolidate shared code, and expand validation beyond the original examples. The [transportation case study](transportation-case-study.md) now records the reported allocation and an optimality certificate; the broader validation and code improvements remain future tasks.
 
 
 ## Reading the reported transportation result
@@ -229,7 +229,7 @@ All six entry points completed successfully on Windows using Python 3.14.3 and N
 | Transportation | Shipments documented in the case study | Total cost 3900, with feasibility and optimality checked separately |
 | Quadratic programming | `x = (1.7, 2.4, 0, 0.3)` | The reported optimal vector for the embedded quadratic example |
 
-These are execution observations, not a comprehensive test suite or independent proofs for every algorithm.
+These results were initially recorded from execution. The regression tests described below now also check mathematical properties of these examples; they do not cover every possible input.
 
 ### Why did the quadratic example need a change?
 
@@ -238,3 +238,36 @@ The original code called `np.row_stack`, which is unavailable in the installed N
 This illustrates the distinction between an algorithm and its software environment: a previously working program can stop running because a dependency changes. Recording the environment makes such problems easier to reproduce.
 
 For captured or redirected Russian-language output on Windows, use `python -X utf8 path/to/main.py` if the terminal's default encoding cannot represent the characters.
+
+
+## What the regression tests establish
+
+Run `python -m unittest discover -s tests -v` from the repository root with the environment activated. A regression test repeats a known case and checks that later changes preserve the required behavior. The tests live in [tests/test_examples.py](../tests/test_examples.py).
+
+A program finishing without an error does not establish that its answer is valid. Our checks ask mathematical questions about returned values:
+
+| Method | What the test checks |
+| --- | --- |
+| Inverse update | Multiplying the updated matrix by its computed inverse gives the identity in both orders |
+| Main and dual simplex | The solution satisfies the original equalities and nonnegativity; a dual bound matches its objective |
+| Initial simplex phase | The function returns a feasible solution and an independent basis containing only original variables |
+| Transportation | Supply and demand totals, nonnegative shipments, cost 3900, and a matching lower bound |
+| Quadratic programming | Feasibility, convexity, and optimality conditions at the returned point; objective -19.95 |
+
+The tests allow tiny numerical differences because floating-point calculations are approximate. They do not require a particular basis order or exact console wording: those can change without changing the mathematics.
+
+### The return-value bug these tests found
+
+The initial-phase example contains two constraints, where the second is twice the first. It therefore needs to remove a redundant constraint when constructing a basis. A nested function calls itself to finish this cleanup.
+
+Previously, the inner call printed the correct answer, but the outer call did not return it. In Python, a function that reaches its end without a `return` statement returns `None`. That explains how the command-line example could look successful while another function trying to use its result would fail.
+
+The repair adds `return` before the recursive call in both copies of the initial-phase implementation. The regression test verifies the actual returned solution and basis, so losing that return value again will fail the test.
+
+### Why the quadratic test checks more than a saved answer
+
+For the quadratic objective, the gradient is $c+Dx$. Equality-constraint multipliers account for directions that would violate the constraints. After accounting for these multipliers, the reduced gradient must be nonnegative, and each positive decision variable must have zero reduced gradient. The latter condition is called **complementarity**.
+
+The test checks these conditions and that the quadratic matrix is positive semidefinite. Together with feasibility, they establish global optimality for this convex example. The computed objective is $-29.8+9.85=-19.95$.
+
+Passing this suite gives us protection while cleaning up the repository. It does not yet establish behavior on infeasible, unbounded, unusually scaled, or arbitrary new problems.

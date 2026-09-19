@@ -62,9 +62,19 @@ python quadraic_programming/main.py
 
 Run these files directly: imports rely on helper modules in the same directory. Examples use embedded input data and require no interactive input. The path `quadraic_programming` retains the original directory spelling.
 
+## Validation
+
+Run the regression tests after installing the requirements:
+
+```sh
+python -m unittest discover -s tests -v
+```
+
+Six tests cover the original examples: the matrix inverse identity, initial-phase feasibility, and feasibility plus optimality conditions for the optimization examples. The initial-phase test checks both copies of the implementation, including removal of a redundant constraint. Tests use Python's built-in `unittest` module and require no additional dependency.
+
 ## Project status
 
-This repository preserves the original coursework implementations. It currently consists of standalone scripts with embedded examples and some duplicated helpers. There is no automated test suite or reference-solver comparison, and compatibility beyond the recorded environment has not yet been established. Successful example execution is not comprehensive algorithm validation.
+This repository preserves the original coursework implementations. It currently consists of standalone scripts with embedded examples and some duplicated helpers. The original examples have mathematical regression checks. Reference-solver comparisons and compatibility beyond the recorded environment have not yet been established; coverage of these examples is not comprehensive algorithm validation.
 
 The initial simplex example demonstrates feasibility search only. Numerical robustness and behavior on degenerate, infeasible, and unbounded inputs require further validation.
 
