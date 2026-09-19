@@ -15,6 +15,10 @@ Python and NumPy implementations of classical optimization algorithms, developed
 
 The implementations expose basis changes, matrix operations, and intermediate solutions for inspection. Each entry point includes a sample problem. Comments and console traces are primarily in Russian.
 
+## Featured case study
+
+[Minimum-cost delivery planning](docs/transportation-case-study.md) models deliveries from three warehouses to three destinations. The optimized allocation reduces cost from **4500 to 3900 monetary units (13.3%)** relative to the northwest corner initialization. The case study includes the formulation, shipment plan, and a mathematical optimality certificate for the coursework instance.
+
 ## Quick start
 
 Requires **Python 3** and **NumPy**. From the repository root, create a virtual environment:

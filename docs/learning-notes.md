@@ -153,7 +153,7 @@ Dual simplex approaches the problem from the other direction: its starting basis
 | `vector_delta` | Reduced-cost quantities used to assess possible improvements |
 | `vector_theta` | Candidate step sizes used to choose a leaving basic variable |
 
-Notation is local to each method: the transportation example uses `a` and `b` for supply and demand, `c` for a cost matrix, and basis entries for occupied cells.
+Notation is local to each method: the transportation example uses `a` and `b` for supply and demand, `c` for a cost matrix, and basis entries for selected cells, which may include zero shipments.
 
 **Indexing requires care.** The simplex and dual simplex examples enter basis indices starting at 1 and convert them to Python's zero-based indices. The quadratic programming code keeps one-based basis labels and subtracts 1 when accessing arrays. Check the relevant method before reusing its inputs.
 
@@ -177,4 +177,40 @@ For each method, try to answer: What does it assume at the start? What changes d
 - Numerical tolerances, degenerate cases, termination behavior, and failure reporting need review before relying on results for unfamiliar inputs.
 - The initial-phase entry point demonstrates the feasibility stage; it does not use its local `c` variable to optimize the original objective afterward.
 
-Planned improvements are to verify the existing examples, add tests for both solutions and failure cases, consolidate shared code, and develop a documented case study with reproducible results. These are future tasks, not current capabilities.
+Planned improvements are to verify the existing examples, add tests for both solutions and failure cases, consolidate shared code, and expand validation beyond the documented transportation instance. The [transportation case study](transportation-case-study.md) now records the reported allocation and an optimality certificate; the broader validation and code improvements remain future tasks.
+
+
+## Reading the reported transportation result
+
+The [formal case study](transportation-case-study.md) presents the example for reviewers. This section explains how to read the output yourself.
+
+Your reported matrix has four positive entries. Read `X[0, 2] = 100` as ?warehouse 1 ships 100 units to destination 3.? Python indices start at zero. The four actual shipments are:
+
+- Warehouse 1 to destination 3: 100 units.
+- Warehouse 2 to destination 2: 200 units.
+- Warehouse 2 to destination 3: 100 units.
+- Warehouse 3 to destination 1: 300 units.
+
+Multiplying these quantities by the corresponding route costs gives $100(1)+200(4)+100(3)+300(9)=3900$. Compare this with 4500 for the initial plan: the saving is 600, or about 13.3% of the initial cost.
+
+### Why does B contain five cells but only four shipments?
+
+For a balanced transportation problem with $m$ warehouses and $n$ destinations, a basis contains $m+n-1$ cells. One supply/demand equality is redundant because the grand totals agree, leaving five independent equalities in this 3-by-3 example.
+
+The final `B = [(1, 1), (2, 2), (0, 2), (2, 0), (1, 2)]` uses zero-based indices. The cell `(2, 2)` means warehouse 3 to destination 3, and its shipment is zero. It remains in the basis to maintain the required basis structure. A basic solution with a zero basic variable is called **degenerate**; this alone is not an error.
+
+The script prints the initial basis with indices shifted to start at 1, but prints the final basis with zero-based indices. This display difference does not change the shipment matrix.
+
+### How do we know 3900 is the best possible cost?
+
+Checking row and column totals proves feasibility. Finding a cheaper plan proves improvement. To prove optimality, we also need to show that no feasible plan can cost less.
+
+The case study assigns a number to each warehouse and destination, called a potential. The sum of the two potentials for a route must not exceed that route's actual cost. This makes the resulting total a lower bound on the cost of every feasible plan.
+
+With warehouse potentials $(0,2,4)$ and destination potentials $(5,2,1)$, that bound is:
+
+$$
+100(0)+300(2)+300(4)+300(5)+200(2)+200(1)=3900.
+$$
+
+Our feasible allocation costs exactly 3900, and the bound says nothing feasible can cost less. Together, those facts prove optimality for this example. The potentials are a certificate we can check independently of the algorithm's printed claim.
