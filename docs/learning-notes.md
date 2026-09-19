@@ -72,7 +72,7 @@ The matrix $D$ describes the curvature of the objective. For a symmetric positiv
 
 Follow the [installation and execution instructions](../README.md#quick-start) in the README. All commands run from the repository root, even though this guide lives in `docs/`.
 
-The console trace shows intermediate matrices, vectors, and algorithm steps. Useful Russian labels include `???` (step), `????????` (iteration), and `?????` (answer).
+The console trace shows intermediate matrices, vectors, and algorithm steps. Useful Russian labels include `ШАГ` (step), `ИТЕРАЦИЯ` (iteration), and `Ответ` (answer).
 
 To try different data, edit the example block near the bottom of the corresponding file, under `if __name__ == '__main__':` or in the `simplex()` function it calls. Start with the existing data before changing dimensions or basis indices.
 
@@ -181,7 +181,7 @@ Possible future work includes tests for more inputs and failure cases, plus comp
 
 The [formal case study](transportation-case-study.md) presents the example for reviewers. This section explains how to read the output yourself.
 
-Your reported matrix has four positive entries. Read `X[0, 2] = 100` as ?warehouse 1 ships 100 units to destination 3.? Python indices start at zero. The four actual shipments are:
+Your reported matrix has four positive entries. Read `X[0, 2] = 100` as "warehouse 1 ships 100 units to destination 3." Python indices start at zero. The four actual shipments are:
 
 - Warehouse 1 to destination 3: 100 units.
 - Warehouse 2 to destination 2: 200 units.

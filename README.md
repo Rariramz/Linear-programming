@@ -2,6 +2,8 @@
 
 Python and NumPy implementations of classical optimization algorithms, developed for the sixth-semester **Optimization and Control Methods** course. The project covers linear programming, transportation problems, and quadratic programming, with step-by-step traces of intermediate calculations.
 
+**Project history:** The optimization algorithms and original coursework examples were developed during my sixth semester at BSUIR in 2022. In 2026, I revisited the project to restore compatibility with current Python and NumPy versions, reorganize the code into reusable modules, add regression tests and documentation, and create additional synthetic case studies. The original Git history is preserved.
+
 ## Algorithms
 
 | Method                                                            | Scope                                                        | Implementation                                 |
@@ -21,7 +23,7 @@ The implementations expose basis changes, matrix operations, and intermediate so
 - [Minimum-cost delivery planning](docs/transportation-case-study.md) allocates shipments from three warehouses to three destinations. Cost falls from **4500 to 3900 (13.3%)**.
 - [Risk-aware allocation](docs/risk-aware-allocation-case-study.md) distributes a fixed budget using a quadratic benefit-risk objective.
 
-All three use synthetic data. Each write-up includes the formulation, result, and a mathematical optimality check.
+The transportation example uses the original coursework data. The production-planning and risk-aware-allocation examples were added in 2026 as synthetic applications of the original implementations. Each write-up includes the formulation, result, and a mathematical optimality check.
 
 ## Quick start
 
