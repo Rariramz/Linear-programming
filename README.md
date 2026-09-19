@@ -19,8 +19,9 @@ The implementations expose basis changes, matrix operations, and intermediate so
 
 - [Production planning](docs/production-planning-case-study.md) maximizes profit for two products under three capacity constraints. The simplex solution earns **2400**.
 - [Minimum-cost delivery planning](docs/transportation-case-study.md) allocates shipments from three warehouses to three destinations. Cost falls from **4500 to 3900 (13.3%)**.
+- [Risk-aware allocation](docs/risk-aware-allocation-case-study.md) distributes a fixed budget using a quadratic benefit-risk objective.
 
-Both use synthetic data. Each write-up includes the formulation, result, and a mathematical optimality check.
+All three use synthetic data. Each write-up includes the formulation, result, and a mathematical optimality check.
 
 ## Quick start
 
@@ -67,6 +68,7 @@ The additional applied examples run with:
 
 ```sh
 python -m cases.production_planning
+python -m cases.risk_aware_allocation
 ```
 
 Examples use embedded input data and require no interactive input.
@@ -79,7 +81,7 @@ Run the regression tests after installing the requirements:
 python -m unittest discover -s tests -v
 ```
 
-Seven tests cover the six coursework examples and one additional applied case. They check feasibility, objective values, matrix identities, and optimality conditions. Tests use Python's built-in `unittest` module and require no additional dependency.
+Eight tests cover the six coursework examples and the two additional applied cases. They check feasibility, objective values, matrix identities, and optimality conditions. Tests use Python's built-in `unittest` module and require no additional dependency.
 
 ## Project status
 

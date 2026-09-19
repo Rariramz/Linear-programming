@@ -9,6 +9,7 @@ import numpy as np
 from numpy.testing import assert_allclose
 
 from cases.production_planning import solve as solve_production_case
+from cases.risk_aware_allocation import solve as solve_allocation_case
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -130,6 +131,12 @@ class ExampleTests(unittest.TestCase):
         assert_allclose(plan[:2], [30, 40], atol=ATOL, rtol=0)
         self.assertAlmostEqual(objective, 2400)
         self.assertTrue(np.all(plan >= -ATOL))
+
+    def test_risk_aware_allocation_case(self):
+        plan, objective = solve_allocation_case()
+        assert_allclose(plan, [230 / 7, 150 / 7, 320 / 7], atol=ATOL, rtol=0)
+        self.assertAlmostEqual(float(plan.sum()), 100)
+        self.assertAlmostEqual(objective, -2265 / 7)
 
 if __name__ == '__main__':
     unittest.main()

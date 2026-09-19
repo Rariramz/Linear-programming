@@ -171,7 +171,7 @@ For each method, try to answer: What does it assume at the start? What changes d
 - The repository contains standalone scripts and duplicated helpers rather than an installable package.
 - Example data is embedded in source files; there is no shared command-line interface or input-file format.
 - NumPy is pinned in `requirements.txt`. The six examples have been run with Python 3.14.3 and NumPy 2.5.3 on Windows; other environments remain untested.
-- Seven automated regression tests cover the original examples and one applied case. Broader inputs and reference-solver comparisons remain future work.
+- Eight automated regression tests cover the original examples and two applied cases. Broader inputs and reference-solver comparisons remain future work.
 - Numerical tolerances, degenerate cases, termination behavior, and failure reporting need review before relying on results for unfamiliar inputs.
 - The initial-phase entry point demonstrates the feasibility stage; it does not use its local `c` variable to optimize the original objective afterward.
 
