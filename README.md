@@ -6,12 +6,12 @@ Python and NumPy implementations of classical optimization algorithms, developed
 
 | Method | Scope | Implementation |
 | --- | --- | --- |
-| Matrix inverse update | Update an inverse after replacing one column | [Source](matrix_inversion/core.py) |
-| Primal simplex: main phase | Optimize from a feasible starting basis | [Source](simplex_method/core.py) |
-| Simplex: initial phase | Construct a feasible basis through an auxiliary problem | [Source](initial_stage_simplex_method/main.py) |
-| Dual simplex | Restore primal feasibility from a dual-feasible basis | [Source](dual_simplex_method/main.py) |
-| Transportation optimization | Northwest corner initialization followed by cost improvement | [Source](matrix_transport_problem/main.py) |
-| Quadratic programming | Optimize a quadratic objective under linear constraints | [Source](quadratic_programming/main.py) |
+| [Matrix inverse update](matrix_inversion/README.md) | Update an inverse after replacing one column | [Source](matrix_inversion/core.py) |
+| [Primal simplex: main phase](simplex_method/README.md) | Optimize from a feasible starting basis | [Source](simplex_method/core.py) |
+| [Simplex: initial phase](initial_stage_simplex_method/README.md) | Construct a feasible basis through an auxiliary problem | [Source](initial_stage_simplex_method/main.py) |
+| [Dual simplex](dual_simplex_method/README.md) | Restore primal feasibility from a dual-feasible basis | [Source](dual_simplex_method/main.py) |
+| [Transportation optimization](matrix_transport_problem/README.md) | Northwest corner initialization followed by cost improvement | [Source](matrix_transport_problem/main.py) |
+| [Quadratic programming](quadratic_programming/README.md) | Optimize a quadratic objective under linear constraints | [Source](quadratic_programming/main.py) |
 
 The implementations expose basis changes, matrix operations, and intermediate solutions for inspection. Each entry point includes a sample problem. Comments and console traces are primarily in Russian.
 
