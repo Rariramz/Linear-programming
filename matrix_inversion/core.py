@@ -71,7 +71,7 @@ def matrix_inversion(n, i, matrix_a_inverse, vector_x, logger=print):
     return matrix_a2_inverse
 
 
-if __name__ == '__main__':
+def run_example():
     np.set_printoptions(formatter={'float': lambda x: "{0:0.2f}".format(x)})
 
     # n_ = int(input('Размерность матрицы n = '))

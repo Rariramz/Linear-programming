@@ -1,6 +1,15 @@
+from pathlib import Path
+import sys
+
 import numpy as np
-from matrix_inversion import input_float_vector, input_float_matrix
-from main_stage_simplex_method import create_matrix_ab, create_vector_cb, input_int_vector
+
+
+_repository_root = str(Path(__file__).resolve().parents[1])
+if _repository_root not in sys.path:
+    sys.path.insert(0, _repository_root)
+
+from matrix_inversion.core import input_float_matrix, input_float_vector
+from simplex_method.core import create_matrix_ab, create_vector_cb, input_int_vector
 
 
 def dual_simplex_method(m, n, matrix_a, vector_b, vector_c, vector_jb, logger=print):

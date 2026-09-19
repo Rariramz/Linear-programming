@@ -53,8 +53,8 @@ Linear programming normally permits fractional decisions. Requiring whole number
 
 | Directory | Method | What it is intended to do |
 | --- | --- | --- |
-| [`matrix_inversion/`](../matrix_inversion/main.py) | Inverse update after replacing one column | Update a known matrix inverse, a calculation used when a simplex basis changes |
-| [`simplex_method/`](../simplex_method/main.py) | Main phase of the simplex method | Improve an existing feasible basic solution toward an optimum |
+| [`matrix_inversion/`](../matrix_inversion/core.py) | Inverse update after replacing one column | Update a known matrix inverse, a calculation used when a simplex basis changes |
+| [`simplex_method/`](../simplex_method/core.py) | Main phase of the simplex method | Improve an existing feasible basic solution toward an optimum |
 | [`initial_stage_simplex_method/`](../initial_stage_simplex_method/main.py) | Initial phase of the simplex method | Find a feasible starting basis using an auxiliary problem, or detect infeasibility |
 | [`dual_simplex_method/`](../dual_simplex_method/main.py) | Dual simplex method | Start from a dual-feasible basis and repair primal infeasibility while preserving dual feasibility |
 | [`matrix_transport_problem/`](../matrix_transport_problem/main.py) | Transportation optimization | Construct an initial shipping plan with the northwest corner rule, then improve it |
@@ -271,3 +271,30 @@ For the quadratic objective, the gradient is $c+Dx$. Equality-constraint multipl
 The test checks these conditions and that the quadratic matrix is positive semidefinite. Together with feasibility, they establish global optimality for this convex example. The computed objective is $-29.8+9.85=-19.95$.
 
 Passing this suite gives us protection while cleaning up the repository. It does not yet establish behavior on infeasible, unbounded, unusually scaled, or arbitrary new problems.
+
+## Reusing earlier assignments as modules
+
+Each algorithm directory represents a separate university task. At the same time, later optimization methods naturally build on earlier ones. The repository now expresses both ideas: each task keeps its own folder and example, while reusable algorithms are imported from the task where they were introduced.
+
+The matrix-inversion assignment owns [matrix_inversion/core.py](../matrix_inversion/core.py). It contains the inverse update and its supporting functions. [matrix_inversion/main.py](../matrix_inversion/main.py) remains the runnable example for that assignment.
+
+The primal-simplex assignment follows the same pattern. [simplex_method/core.py](../simplex_method/core.py) contains the algorithm, while [simplex_method/main.py](../simplex_method/main.py) runs its original example. The initial-phase and dual-simplex tasks import these earlier modules instead of carrying private copies.
+
+```text
+matrix_inversion/core.py
+          |
+          v
+simplex_method/core.py
+          |
+          +--------------------+
+          v                    v
+initial_stage_simplex_method   dual_simplex_method
+```
+
+Files named `__init__.py` make `matrix_inversion` and `simplex_method` Python packages. A package is a directory that can expose reusable modules. The `core.py` files contain algorithms; the `main.py` files contain the assignment demonstrations. This distinction makes it clear where to read the method and where to run it.
+
+The folder hierarchy therefore still tells the academic story: matrix inversion was one task, primal simplex another, followed by the initial and dual methods. Reuse shows how those tasks depend on one another rather than presenting them as unrelated programs.
+
+Running a file directly normally puts only its own directory on Python's import path. Each dependent entry point derives the repository root from its file location before importing the earlier task packages. This preserves commands such as `python initial_stage_simplex_method/main.py`, even when launched from another working directory.
+
+Regression tests exercise both each reusable `core.py` module and its public `main.py` entry point. All six original examples and the dual directory's initial-phase helper were also run from outside the repository directory.

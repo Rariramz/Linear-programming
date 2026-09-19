@@ -6,8 +6,8 @@ Python and NumPy implementations of classical optimization algorithms, developed
 
 | Method | Scope | Implementation |
 | --- | --- | --- |
-| Matrix inverse update | Update an inverse after replacing one column | [Source](matrix_inversion/main.py) |
-| Primal simplex: main phase | Optimize from a feasible starting basis | [Source](simplex_method/main.py) |
+| Matrix inverse update | Update an inverse after replacing one column | [Source](matrix_inversion/core.py) |
+| Primal simplex: main phase | Optimize from a feasible starting basis | [Source](simplex_method/core.py) |
 | Simplex: initial phase | Construct a feasible basis through an auxiliary problem | [Source](initial_stage_simplex_method/main.py) |
 | Dual simplex | Restore primal feasibility from a dual-feasible basis | [Source](dual_simplex_method/main.py) |
 | Transportation optimization | Northwest corner initialization followed by cost improvement | [Source](matrix_transport_problem/main.py) |
@@ -73,6 +73,8 @@ python -m unittest discover -s tests -v
 Six tests cover the original examples: the matrix inverse identity, initial-phase feasibility, and feasibility plus optimality conditions for the optimization examples. The initial-phase test checks both copies of the implementation, including removal of a redundant constraint. Tests use Python's built-in `unittest` module and require no additional dependency.
 
 ## Project status
+
+Each top-level algorithm directory represents a separate university assignment. Reusable implementations remain owned by the task that introduced them: [`matrix_inversion/core.py`](matrix_inversion/core.py) provides the inverse update, and [`simplex_method/core.py`](simplex_method/core.py) provides the main primal-simplex phase. Later assignments import these modules while keeping their own entry points and examples.
 
 This repository preserves the original coursework implementations. It currently consists of standalone scripts with embedded examples and some duplicated helpers. The original examples have mathematical regression checks. Reference-solver comparisons and compatibility beyond the recorded environment have not yet been established; coverage of these examples is not comprehensive algorithm validation.
 

@@ -18,6 +18,7 @@ def load_script(relative_path):
     path = ROOT / relative_path
     helper_names = {file.stem for file in path.parent.glob('*.py')}
     saved = {name: sys.modules.pop(name) for name in helper_names if name in sys.modules}
+    saved_path = sys.path.copy()
     sys.path.insert(0, str(path.parent))
     try:
         spec = importlib.util.spec_from_file_location('coursework_example', path)
@@ -25,7 +26,7 @@ def load_script(relative_path):
         spec.loader.exec_module(module)
         return module
     finally:
-        sys.path.pop(0)
+        sys.path[:] = saved_path
         for name in helper_names:
             sys.modules.pop(name, None)
         sys.modules.update(saved)
@@ -46,23 +47,29 @@ class ExampleTests(unittest.TestCase):
         self.assertAlmostEqual(float(b @ u), expected_value)
 
     def test_inverse_update(self):
-        module = load_script('matrix_inversion/main.py')
-        a = np.array([[1, -1, 0], [0, 1, 0], [0, 0, 1]])
-        inverse = np.array([[1, 1, 0], [0, 1, 0], [0, 0, 1]])
-        replacement = [1, 0, 1]
-        result = module.matrix_inversion(3, 2, inverse, replacement, logger=None)
-        a[:, 2] = replacement
-        assert_allclose(a @ result, np.eye(3), atol=ATOL, rtol=0)
-        assert_allclose(result @ a, np.eye(3), atol=ATOL, rtol=0)
+        paths = ('matrix_inversion/core.py', 'matrix_inversion/main.py')
+        for path in paths:
+            with self.subTest(path=path):
+                module = load_script(path)
+                a = np.array([[1, -1, 0], [0, 1, 0], [0, 0, 1]])
+                inverse = np.array([[1, 1, 0], [0, 1, 0], [0, 0, 1]])
+                replacement = [1, 0, 1]
+                result = module.matrix_inversion(3, 2, inverse, replacement, logger=None)
+                a[:, 2] = replacement
+                assert_allclose(a @ result, np.eye(3), atol=ATOL, rtol=0)
+                assert_allclose(result @ a, np.eye(3), atol=ATOL, rtol=0)
 
     def test_primal_simplex(self):
-        module = load_script('simplex_method/main.py')
         a = np.array([[-1, 1, 1, 0, 0], [1, 0, 0, 1, 0], [0, 1, 0, 0, 1]])
         b = np.array([1, 3, 2])
         c = np.array([1, 1, 0, 0, 0])
-        x, basis = module.main_stage_simplex_method(
-            3, 5, a, [0, 0, 1, 3, 2], c, [2, 3, 4], logger=None)
-        self.assert_lp_optimal(a, b, c, x, basis, 5)
+        paths = ('simplex_method/core.py', 'simplex_method/main.py')
+        for path in paths:
+            with self.subTest(path=path):
+                module = load_script(path)
+                x, basis = module.main_stage_simplex_method(
+                    3, 5, a, [0, 0, 1, 3, 2], c, [2, 3, 4], logger=None)
+                self.assert_lp_optimal(a, b, c, x, basis, 5)
 
     def test_initial_simplex_with_redundant_constraint(self):
         # Both copies contain the same recursive basis-cleanup path.

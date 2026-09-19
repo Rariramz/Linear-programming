@@ -1,5 +1,10 @@
 import numpy as np
-from matrix_inversion import matrix_inversion, input_float_vector, input_float_matrix
+
+from matrix_inversion.core import (
+    input_float_matrix,
+    input_float_vector,
+    matrix_inversion,
+)
 
 
 def input_int_vector(message):
