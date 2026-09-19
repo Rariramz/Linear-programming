@@ -11,7 +11,7 @@ Python and NumPy implementations of classical optimization algorithms, developed
 | Simplex: initial phase | Construct a feasible basis through an auxiliary problem | [Source](initial_stage_simplex_method/main.py) |
 | Dual simplex | Restore primal feasibility from a dual-feasible basis | [Source](dual_simplex_method/main.py) |
 | Transportation optimization | Northwest corner initialization followed by cost improvement | [Source](matrix_transport_problem/main.py) |
-| Quadratic programming | Optimize a quadratic objective under linear constraints | [Source](quadraic_programming/main.py) |
+| Quadratic programming | Optimize a quadratic objective under linear constraints | [Source](quadratic_programming/main.py) |
 
 The implementations expose basis changes, matrix operations, and intermediate solutions for inspection. Each entry point includes a sample problem. Comments and console traces are primarily in Russian.
 
@@ -57,10 +57,10 @@ python matrix_inversion/main.py
 python simplex_method/main.py
 python initial_stage_simplex_method/main.py
 python dual_simplex_method/main.py
-python quadraic_programming/main.py
+python quadratic_programming/main.py
 ```
 
-Run these files directly: imports rely on helper modules in the same directory. Examples use embedded input data and require no interactive input. The path `quadraic_programming` retains the original directory spelling.
+Examples use embedded input data and require no interactive input.
 
 ## Validation
 

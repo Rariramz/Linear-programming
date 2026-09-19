@@ -58,9 +58,7 @@ Linear programming normally permits fractional decisions. Requiring whole number
 | [`initial_stage_simplex_method/`](../initial_stage_simplex_method/main.py) | Initial phase of the simplex method | Find a feasible starting basis using an auxiliary problem, or detect infeasibility |
 | [`dual_simplex_method/`](../dual_simplex_method/main.py) | Dual simplex method | Start from a dual-feasible basis and repair primal infeasibility while preserving dual feasibility |
 | [`matrix_transport_problem/`](../matrix_transport_problem/main.py) | Transportation optimization | Construct an initial shipping plan with the northwest corner rule, then improve it |
-| [`quadraic_programming/`](../quadraic_programming/main.py) | Quadratic programming | Optimize an objective that includes quadratic terms under linear constraints |
-
-The spelling `quadraic_programming` is the existing directory name and is retained in the commands below.
+| [`quadratic_programming/`](../quadratic_programming/main.py) | Quadratic programming | Optimize an objective that includes quadratic terms under linear constraints |
 
 Quadratic programming extends the linear objective to an expression such as:
 

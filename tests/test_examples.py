@@ -110,7 +110,7 @@ class ExampleTests(unittest.TestCase):
         self.assertAlmostEqual(float(u @ supply + v @ demand), float(np.sum(x * costs)))
 
     def test_quadratic_programming(self):
-        module = load_script('quadraic_programming/main.py')
+        module = load_script('quadratic_programming/main.py')
         c = np.array([-8, -6, -4, -6])
         d = np.array([[2, 1, 1, 0], [1, 1, 0, 0], [1, 0, 1, 0], [0, 0, 0, 0]])
         a = np.array([[1, 0, 2, 1], [0, 1, -1, 2]])
