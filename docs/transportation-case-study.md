@@ -39,7 +39,7 @@ Total supply equals total demand at 700 units, so this instance is balanced and 
 
 ## Method
 
-The [implementation](../matrix_transport_problem/main.py) uses two stages:
+The [implementation](../matrix_transport_problem/core.py) uses two stages:
 
 1. The [northwest corner rule](../matrix_transport_problem/north_west_corner_rule.py) constructs a feasible allocation by exhausting supply or demand one cell at a time, without considering costs.
 2. The [optimization stage](../matrix_transport_problem/search_optimal_plan.py) uses potentials and reallocations along cycles to improve cost while preserving supply and demand totals.
@@ -114,7 +114,7 @@ The final allocation achieves this lower bound, proving that it is optimal. This
 Follow the [environment setup](../README.md#quick-start), then run from the repository root:
 
 ```sh
-python matrix_transport_problem/main.py
+python -m matrix_transport_problem.main
 ```
 
 The final allocation reported by the project author during the documentation update was:

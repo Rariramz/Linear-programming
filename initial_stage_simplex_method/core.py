@@ -131,25 +131,3 @@ def initial_stage_simplex_method(matrix_a, vector_b, m, n, logger=print):
         return from_seven_step(matrix_a, vector_jb, vector_b, matrix_a1)
 
     return from_seven_step(matrix_a, vector_jb, vector_b, matrix_a1)
-
-
-def simplex():
-    # m_ = int(input('m = '))
-    # n_ = int(input('n = '))
-    # a = input_float_matrix(m_, 'Введите матрицу A, отделяя строки матрицы переводом строки:')
-    # b = input_int_vector('Введите вектор b(T):')
-    # c = input_int_vector('Введите вектор c(T):')
-
-    # Тестовый пример
-    m_ = 2
-    n_ = 3
-    a = np.array([[1, 1, 1],
-                  [2, 2, 2]])
-    b = list([0, 0])
-    c = list([1, 0, 0])
-
-    initial_stage_simplex_method(a, b, m_, n_)
-
-
-if __name__ == "__main__":
-    simplex()

@@ -8,10 +8,10 @@ Python and NumPy implementations of classical optimization algorithms, developed
 | --- | --- | --- |
 | [Matrix inverse update](matrix_inversion/README.md) | Update an inverse after replacing one column | [Source](matrix_inversion/core.py) |
 | [Primal simplex: main phase](simplex_method/README.md) | Optimize from a feasible starting basis | [Source](simplex_method/core.py) |
-| [Simplex: initial phase](initial_stage_simplex_method/README.md) | Construct a feasible basis through an auxiliary problem | [Source](initial_stage_simplex_method/main.py) |
-| [Dual simplex](dual_simplex_method/README.md) | Restore primal feasibility from a dual-feasible basis | [Source](dual_simplex_method/main.py) |
-| [Transportation optimization](matrix_transport_problem/README.md) | Northwest corner initialization followed by cost improvement | [Source](matrix_transport_problem/main.py) |
-| [Quadratic programming](quadratic_programming/README.md) | Optimize a quadratic objective under linear constraints | [Source](quadratic_programming/main.py) |
+| [Simplex: initial phase](initial_stage_simplex_method/README.md) | Construct a feasible basis through an auxiliary problem | [Source](initial_stage_simplex_method/core.py) |
+| [Dual simplex](dual_simplex_method/README.md) | Restore primal feasibility from a dual-feasible basis | [Source](dual_simplex_method/core.py) |
+| [Transportation optimization](matrix_transport_problem/README.md) | Northwest corner initialization followed by cost improvement | [Source](matrix_transport_problem/core.py) |
+| [Quadratic programming](quadratic_programming/README.md) | Optimize a quadratic objective under linear constraints | [Source](quadratic_programming/core.py) |
 
 The implementations expose basis changes, matrix operations, and intermediate solutions for inspection. Each entry point includes a sample problem. Comments and console traces are primarily in Russian.
 
@@ -43,7 +43,7 @@ Install NumPy and run the transportation example:
 
 ```sh
 python -m pip install -r requirements.txt
-python matrix_transport_problem/main.py
+python -m matrix_transport_problem.main
 ```
 
 If PowerShell prevents activation, use `.\.venv\Scripts\python.exe` in place of `python` for installation and execution.
@@ -53,11 +53,11 @@ The transportation example allocates shipments from three suppliers to three des
 Other examples:
 
 ```sh
-python matrix_inversion/main.py
-python simplex_method/main.py
-python initial_stage_simplex_method/main.py
-python dual_simplex_method/main.py
-python quadratic_programming/main.py
+python -m matrix_inversion.main
+python -m simplex_method.main
+python -m initial_stage_simplex_method.main
+python -m dual_simplex_method.main
+python -m quadratic_programming.main
 ```
 
 Examples use embedded input data and require no interactive input.
@@ -84,4 +84,4 @@ The initial simplex example demonstrates feasibility search only. Numerical robu
 
 The [learning notes](docs/learning-notes.md) provide a mathematical refresher, a worked transportation example, a glossary of code notation, and a suggested study sequence.
 
-If redirected console output raises an encoding error on Windows, add `-X utf8`, for example: `python -X utf8 matrix_transport_problem/main.py`.
+If redirected console output raises an encoding error on Windows, add `-X utf8`, for example: `python -X utf8 -m matrix_transport_problem.main`.

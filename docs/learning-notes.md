@@ -55,10 +55,10 @@ Linear programming normally permits fractional decisions. Requiring whole number
 | --- | --- | --- |
 | [`matrix_inversion/`](../matrix_inversion/core.py) | Inverse update after replacing one column | Update a known matrix inverse, a calculation used when a simplex basis changes |
 | [`simplex_method/`](../simplex_method/core.py) | Main phase of the simplex method | Improve an existing feasible basic solution toward an optimum |
-| [`initial_stage_simplex_method/`](../initial_stage_simplex_method/main.py) | Initial phase of the simplex method | Find a feasible starting basis using an auxiliary problem, or detect infeasibility |
-| [`dual_simplex_method/`](../dual_simplex_method/main.py) | Dual simplex method | Start from a dual-feasible basis and repair primal infeasibility while preserving dual feasibility |
-| [`matrix_transport_problem/`](../matrix_transport_problem/main.py) | Transportation optimization | Construct an initial shipping plan with the northwest corner rule, then improve it |
-| [`quadratic_programming/`](../quadratic_programming/main.py) | Quadratic programming | Optimize an objective that includes quadratic terms under linear constraints |
+| [`initial_stage_simplex_method/`](../initial_stage_simplex_method/core.py) | Initial phase of the simplex method | Find a feasible starting basis using an auxiliary problem, or detect infeasibility |
+| [`dual_simplex_method/`](../dual_simplex_method/core.py) | Dual simplex method | Start from a dual-feasible basis and repair primal infeasibility while preserving dual feasibility |
+| [`matrix_transport_problem/`](../matrix_transport_problem/core.py) | Transportation optimization | Construct an initial shipping plan with the northwest corner rule, then improve it |
+| [`quadratic_programming/`](../quadratic_programming/core.py) | Quadratic programming | Optimize an objective that includes quadratic terms under linear constraints |
 
 Quadratic programming extends the linear objective to an expression such as:
 
@@ -293,6 +293,6 @@ Files named `__init__.py` make `matrix_inversion` and `simplex_method` Python pa
 
 The folder hierarchy therefore still tells the academic story: matrix inversion was one task, primal simplex another, followed by the initial and dual methods. Reuse shows how those tasks depend on one another rather than presenting them as unrelated programs.
 
-Running a file directly normally puts only its own directory on Python's import path. Each dependent entry point derives the repository root from its file location before importing the earlier task packages. This preserves commands such as `python initial_stage_simplex_method/main.py`, even when launched from another working directory.
+The examples can be run as modules from the repository root, for example `python -m initial_stage_simplex_method.main`.
 
 Regression tests exercise both each reusable `core.py` module and its public `main.py` entry point. All six original examples and the dual directory's initial-phase helper were also run from outside the repository directory.

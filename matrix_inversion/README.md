@@ -5,7 +5,7 @@ Updates a known matrix inverse after replacing one column of the original matrix
 Run the example from the repository root:
 
 ```sh
-python matrix_inversion/main.py
+python -m matrix_inversion.main
 ```
 
 The algorithm is in [`core.py`](core.py); [`main.py`](main.py) contains the runnable assignment example.

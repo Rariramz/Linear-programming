@@ -47,7 +47,7 @@ class ExampleTests(unittest.TestCase):
         self.assertAlmostEqual(float(b @ u), expected_value)
 
     def test_inverse_update(self):
-        paths = ('matrix_inversion/core.py', 'matrix_inversion/main.py')
+        paths = ('matrix_inversion/core.py',)
         for path in paths:
             with self.subTest(path=path):
                 module = load_script(path)
@@ -63,7 +63,7 @@ class ExampleTests(unittest.TestCase):
         a = np.array([[-1, 1, 1, 0, 0], [1, 0, 0, 1, 0], [0, 1, 0, 0, 1]])
         b = np.array([1, 3, 2])
         c = np.array([1, 1, 0, 0, 0])
-        paths = ('simplex_method/core.py', 'simplex_method/main.py')
+        paths = ('simplex_method/core.py',)
         for path in paths:
             with self.subTest(path=path):
                 module = load_script(path)
@@ -72,9 +72,7 @@ class ExampleTests(unittest.TestCase):
                 self.assert_lp_optimal(a, b, c, x, basis, 5)
 
     def test_initial_simplex_with_redundant_constraint(self):
-        # Both copies contain the same recursive basis-cleanup path.
-        for path in ('initial_stage_simplex_method/main.py',
-                     'dual_simplex_method/initial_stage_simplex_method.py'):
+        for path in ('initial_stage_simplex_method/core.py',):
             with self.subTest(path=path):
                 module = load_script(path)
                 a = np.array([[1, 1, 1], [2, 2, 2]])
@@ -87,7 +85,7 @@ class ExampleTests(unittest.TestCase):
                 self.assertEqual(np.linalg.matrix_rank(a[:, basis]), len(basis))
 
     def test_dual_simplex(self):
-        module = load_script('dual_simplex_method/main.py')
+        module = load_script('dual_simplex_method/core.py')
         a = np.array([[-2, -1, -4, 1, 0], [-2, -2, -2, 0, 1]])
         b = np.array([-1, -1.5])
         c = np.array([-4, -3, -7, 0, 0])
@@ -95,7 +93,7 @@ class ExampleTests(unittest.TestCase):
         self.assert_lp_optimal(a, b, c, x, basis, -2.5)
 
     def test_transportation(self):
-        module = load_script('matrix_transport_problem/main.py')
+        module = load_script('matrix_transport_problem/core.py')
         supply = np.array([100, 300, 300])
         demand = np.array([300, 200, 200])
         costs = np.array([[8, 4, 1], [8, 4, 3], [9, 7, 5]])
@@ -110,7 +108,7 @@ class ExampleTests(unittest.TestCase):
         self.assertAlmostEqual(float(u @ supply + v @ demand), float(np.sum(x * costs)))
 
     def test_quadratic_programming(self):
-        module = load_script('quadratic_programming/main.py')
+        module = load_script('quadratic_programming/core.py')
         c = np.array([-8, -6, -4, -6])
         d = np.array([[2, 1, 1, 0], [1, 1, 0, 0], [1, 0, 1, 0], [0, 0, 0, 0]])
         a = np.array([[1, 0, 2, 1], [0, 1, -1, 2]])
