@@ -18,11 +18,11 @@ Optimization means choosing the best available decision subject to restrictions.
 
 An optimization model has three ingredients:
 
-| Ingredient | Meaning | Factory example |
-| --- | --- | --- |
-| Decision variables | Quantities we can choose | Units of each product to manufacture |
-| Objective function | The quantity we maximize or minimize | Total profit |
-| Constraints | Rules that a valid decision must satisfy | Material use cannot exceed available stock |
+| Ingredient         | Meaning                                  | Factory example                            |
+| ------------------ | ---------------------------------------- | ------------------------------------------ |
+| Decision variables | Quantities we can choose                 | Units of each product to manufacture       |
+| Objective function | The quantity we maximize or minimize     | Total profit                               |
+| Constraints        | Rules that a valid decision must satisfy | Material use cannot exceed available stock |
 
 A **feasible solution** satisfies every constraint. An **optimal solution** is a feasible solution with the best objective value. There can be multiple optimal solutions.
 
@@ -51,14 +51,14 @@ Linear programming normally permits fractional decisions. Requiring whole number
 
 ## Implemented methods
 
-| Directory | Method | What it is intended to do |
-| --- | --- | --- |
-| [`matrix_inversion/`](../matrix_inversion/core.py) | Inverse update after replacing one column | Update a known matrix inverse, a calculation used when a simplex basis changes |
-| [`simplex_method/`](../simplex_method/core.py) | Main phase of the simplex method | Improve an existing feasible basic solution toward an optimum |
-| [`initial_stage_simplex_method/`](../initial_stage_simplex_method/core.py) | Initial phase of the simplex method | Find a feasible starting basis using an auxiliary problem, or detect infeasibility |
-| [`dual_simplex_method/`](../dual_simplex_method/core.py) | Dual simplex method | Start from a dual-feasible basis and repair primal infeasibility while preserving dual feasibility |
-| [`matrix_transport_problem/`](../matrix_transport_problem/core.py) | Transportation optimization | Construct an initial shipping plan with the northwest corner rule, then improve it |
-| [`quadratic_programming/`](../quadratic_programming/core.py) | Quadratic programming | Optimize an objective that includes quadratic terms under linear constraints |
+| Directory                                                                  | Method                                    | What it is intended to do                                                                          |
+| -------------------------------------------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [`matrix_inversion/`](../matrix_inversion/core.py)                         | Inverse update after replacing one column | Update a known matrix inverse, a calculation used when a simplex basis changes                     |
+| [`simplex_method/`](../simplex_method/core.py)                             | Main phase of the simplex method          | Improve an existing feasible basic solution toward an optimum                                      |
+| [`initial_stage_simplex_method/`](../initial_stage_simplex_method/core.py) | Initial phase of the simplex method       | Find a feasible starting basis using an auxiliary problem, or detect infeasibility                 |
+| [`dual_simplex_method/`](../dual_simplex_method/core.py)                   | Dual simplex method                       | Start from a dual-feasible basis and repair primal infeasibility while preserving dual feasibility |
+| [`matrix_transport_problem/`](../matrix_transport_problem/core.py)         | Transportation optimization               | Construct an initial shipping plan with the northwest corner rule, then improve it                 |
+| [`quadratic_programming/`](../quadratic_programming/core.py)               | Quadratic programming                     | Optimize an objective that includes quadratic terms under linear constraints                       |
 
 Quadratic programming extends the linear objective to an expression such as:
 
@@ -80,12 +80,12 @@ To try different data, edit the example block near the bottom of the correspondi
 
 The built-in [transportation example](../matrix_transport_problem/main.py) allocates shipments from three suppliers to three destinations. Its inputs are:
 
-| Supplier | Cost to destination 1 | Cost to destination 2 | Cost to destination 3 | Available supply |
-| --- | ---: | ---: | ---: | ---: |
-| 1 | 8 | 4 | 1 | 100 |
-| 2 | 8 | 4 | 3 | 300 |
-| 3 | 9 | 7 | 5 | 300 |
-| **Required demand** | **300** | **200** | **200** | **700** |
+| Supplier            | Cost to destination 1 | Cost to destination 2 | Cost to destination 3 | Available supply |
+| ------------------- | --------------------: | --------------------: | --------------------: | ---------------: |
+| 1                   |                     8 |                     4 |                     1 |              100 |
+| 2                   |                     8 |                     4 |                     3 |              300 |
+| 3                   |                     9 |                     7 |                     5 |              300 |
+| **Required demand** |               **300** |               **200** |               **200** |          **700** |
 
 Costs are per shipped unit in arbitrary monetary units. Total supply and demand are both 700, so the problem is **balanced**.
 
@@ -140,16 +140,16 @@ The main phase assumes a suitable starting solution is already available. The in
 
 Dual simplex approaches the problem from the other direction: its starting basis satisfies the dual optimality conditions, but some basic variables may violate nonnegativity. Its pivots aim to restore feasibility while retaining those dual conditions.
 
-| Code notation | Meaning |
-| --- | --- |
-| `m`, `n` | Number of constraints and variables |
-| `matrix_a`, `vector_b` | Constraint coefficients and right-hand-side values |
-| `vector_c`, `vector_x` | Objective coefficients and current solution |
-| `vector_jb`, `B` | Indices of the current basic variables |
-| `matrix_ab` | Columns of `A` selected by the basis |
-| `vector_u` | Simplex multipliers, also called potentials |
-| `vector_delta` | Reduced-cost quantities used to assess possible improvements |
-| `vector_theta` | Candidate step sizes used to choose a leaving basic variable |
+| Code notation          | Meaning                                                      |
+| ---------------------- | ------------------------------------------------------------ |
+| `m`, `n`               | Number of constraints and variables                          |
+| `matrix_a`, `vector_b` | Constraint coefficients and right-hand-side values           |
+| `vector_c`, `vector_x` | Objective coefficients and current solution                  |
+| `vector_jb`, `B`       | Indices of the current basic variables                       |
+| `matrix_ab`            | Columns of `A` selected by the basis                         |
+| `vector_u`             | Simplex multipliers, also called potentials                  |
+| `vector_delta`         | Reduced-cost quantities used to assess possible improvements |
+| `vector_theta`         | Candidate step sizes used to choose a leaving basic variable |
 
 Notation is local to each method: the transportation example uses `a` and `b` for supply and demand, `c` for a cost matrix, and basis entries for selected cells, which may include zero shipments.
 
@@ -171,12 +171,11 @@ For each method, try to answer: What does it assume at the start? What changes d
 - The repository contains standalone scripts and duplicated helpers rather than an installable package.
 - Example data is embedded in source files; there is no shared command-line interface or input-file format.
 - NumPy is pinned in `requirements.txt`. The six examples have been run with Python 3.14.3 and NumPy 2.5.3 on Windows; other environments remain untested.
-- Six automated regression tests cover the original examples. Broader inputs and reference-solver comparisons remain future work.
+- Seven automated regression tests cover the original examples and one applied case. Broader inputs and reference-solver comparisons remain future work.
 - Numerical tolerances, degenerate cases, termination behavior, and failure reporting need review before relying on results for unfamiliar inputs.
 - The initial-phase entry point demonstrates the feasibility stage; it does not use its local `c` variable to optimize the original objective afterward.
 
-Planned improvements are to add tests for more inputs and failure cases, consolidate shared code, and expand validation beyond the original examples. The [transportation case study](transportation-case-study.md) now records the reported allocation and an optimality certificate; the broader validation and code improvements remain future tasks.
-
+Possible future work includes tests for more inputs and failure cases, plus comparisons with a reference solver.
 
 ## Reading the reported transportation result
 
@@ -213,19 +212,18 @@ $$
 
 Our feasible allocation costs exactly 3900, and the bound says nothing feasible can cost less. Together, those facts prove optimality for this example. The potentials are a certificate we can check independently of the algorithm's printed claim.
 
-
 ## Reproducing the original examples
 
 All six entry points completed successfully on Windows using Python 3.14.3 and NumPy 2.5.3. Install the recorded dependency with `python -m pip install -r requirements.txt` inside the virtual environment. Pinning means selecting the exact NumPy version used for this check, so future installations do not silently choose a different release.
 
-| Example | Observed result | How to interpret it |
-| --- | --- | --- |
-| Matrix inverse update | Rows `(1, 1, -1)`, `(0, 1, 0)`, `(0, 0, 1)` | The inverse after replacing the selected column |
-| Main simplex phase | `x = (3, 2, 2, 0, 0)` | The reported optimal decision vector; with the supplied coefficients, the objective is 5 |
-| Initial simplex phase | `x = (0, 0, 0)` | A feasible starting solution; this stage does not optimize the original objective |
-| Dual simplex | `x = (0.25, 0.5, 0, 0, 0)` | The reported optimal decision vector; the supplied objective coefficients give -2.5 |
-| Transportation | Shipments documented in the case study | Total cost 3900, with feasibility and optimality checked separately |
-| Quadratic programming | `x = (1.7, 2.4, 0, 0.3)` | The reported optimal vector for the embedded quadratic example |
+| Example               | Observed result                             | How to interpret it                                                                      |
+| --------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Matrix inverse update | Rows `(1, 1, -1)`, `(0, 1, 0)`, `(0, 0, 1)` | The inverse after replacing the selected column                                          |
+| Main simplex phase    | `x = (3, 2, 2, 0, 0)`                       | The reported optimal decision vector; with the supplied coefficients, the objective is 5 |
+| Initial simplex phase | `x = (0, 0, 0)`                             | A feasible starting solution; this stage does not optimize the original objective        |
+| Dual simplex          | `x = (0.25, 0.5, 0, 0, 0)`                  | The reported optimal decision vector; the supplied objective coefficients give -2.5      |
+| Transportation        | Shipments documented in the case study      | Total cost 3900, with feasibility and optimality checked separately                      |
+| Quadratic programming | `x = (1.7, 2.4, 0, 0.3)`                    | The reported optimal vector for the embedded quadratic example                           |
 
 These results were initially recorded from execution. The regression tests described below now also check mathematical properties of these examples; they do not cover every possible input.
 
@@ -237,20 +235,19 @@ This illustrates the distinction between an algorithm and its software environme
 
 For captured or redirected Russian-language output on Windows, use `python -X utf8 path/to/main.py` if the terminal's default encoding cannot represent the characters.
 
-
 ## What the regression tests establish
 
 Run `python -m unittest discover -s tests -v` from the repository root with the environment activated. A regression test repeats a known case and checks that later changes preserve the required behavior. The tests live in [tests/test_examples.py](../tests/test_examples.py).
 
 A program finishing without an error does not establish that its answer is valid. Our checks ask mathematical questions about returned values:
 
-| Method | What the test checks |
-| --- | --- |
-| Inverse update | Multiplying the updated matrix by its computed inverse gives the identity in both orders |
+| Method                | What the test checks                                                                                 |
+| --------------------- | ---------------------------------------------------------------------------------------------------- |
+| Inverse update        | Multiplying the updated matrix by its computed inverse gives the identity in both orders             |
 | Main and dual simplex | The solution satisfies the original equalities and nonnegativity; a dual bound matches its objective |
 | Initial simplex phase | The function returns a feasible solution and an independent basis containing only original variables |
-| Transportation | Supply and demand totals, nonnegative shipments, cost 3900, and a matching lower bound |
-| Quadratic programming | Feasibility, convexity, and optimality conditions at the returned point; objective -19.95 |
+| Transportation        | Supply and demand totals, nonnegative shipments, cost 3900, and a matching lower bound               |
+| Quadratic programming | Feasibility, convexity, and optimality conditions at the returned point; objective -19.95            |
 
 The tests allow tiny numerical differences because floating-point calculations are approximate. They do not require a particular basis order or exact console wording: those can change without changing the mathematics.
 
@@ -295,4 +292,4 @@ The folder hierarchy therefore still tells the academic story: matrix inversion 
 
 The examples can be run as modules from the repository root, for example `python -m initial_stage_simplex_method.main`.
 
-Regression tests exercise both each reusable `core.py` module and its public `main.py` entry point. All six original examples and the dual directory's initial-phase helper were also run from outside the repository directory.
+Regression tests exercise each reusable `core.py` module. All six original examples also run through their package entry points.

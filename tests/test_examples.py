@@ -8,6 +8,8 @@ import unittest
 import numpy as np
 from numpy.testing import assert_allclose
 
+from cases.production_planning import solve as solve_production_case
+
 
 ROOT = Path(__file__).resolve().parents[1]
 ATOL = 1e-9
@@ -123,6 +125,11 @@ class ExampleTests(unittest.TestCase):
         assert_allclose(x * reduced_gradient, np.zeros(4), atol=ATOL, rtol=0)
         self.assertAlmostEqual(float(c @ x + 0.5 * x @ d @ x), -19.95)
 
+    def test_production_planning_case(self):
+        plan, objective, _ = solve_production_case()
+        assert_allclose(plan[:2], [30, 40], atol=ATOL, rtol=0)
+        self.assertAlmostEqual(objective, 2400)
+        self.assertTrue(np.all(plan >= -ATOL))
 
 if __name__ == '__main__':
     unittest.main()
